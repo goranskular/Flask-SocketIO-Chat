@@ -10,6 +10,7 @@ import urllib.parse
 import pickle
 
 def save():
+    cur.execute("DELETE FROM rooms WHERE room = 'ALL';")
     cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %s)", ("ALL", pickle.dumps(messages)))
     conn.commit()
 
