@@ -1,34 +1,5 @@
 #!/bin/env python
 import os
-import psycopg2
-import urllib.parse
-import pickle
-
-def save():
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", pickle.dumps(messages)))
-    conn.commit()
-
-def load():
-    cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
-    res = cur.fetchone()
-    if res:
-        messages=pickle.loads(res)
-
-urllib.parse.uses_netloc.append("postgres")
-url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
-
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
-
-cur = conn.cursor()
-
-messages = {}
-load()
 
 port = int(os.environ.get('PORT', 5000)) 
 
