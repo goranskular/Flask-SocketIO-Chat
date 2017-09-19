@@ -10,6 +10,8 @@ import urllib.parse
 import pickle
 import codecs
 
+messages = {}
+
 def save():
     cur.execute("DELETE FROM rooms WHERE room = 'ALL';")
     cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %s)", ("ALL", codecs.encode(pickle.dumps(messages),"base64")))
@@ -34,7 +36,6 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-messages = {}
 load()
 
 cest = pytz.timezone('Europe/Zagreb')
