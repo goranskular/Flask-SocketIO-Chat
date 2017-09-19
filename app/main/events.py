@@ -17,7 +17,7 @@ def load():
     cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
     res = cur.fetchone()
     if res:
-        messages=pickle.loads(res)
+        messages=pickle.loads(res[0])
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
