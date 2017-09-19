@@ -5,12 +5,12 @@ import urllib.parse
 import pickle
 
 def save():
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages)))
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", pickle.dumps(messages)))
     conn.commit()
 
 def load():
     cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
-    messages=cPickle.loads(cur.fetchone())
+    messages=pickle.loads(cur.fetchone())
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
