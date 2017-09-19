@@ -3,7 +3,6 @@ from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 from datetime import datetime
 import pytz
-import cPickle
 
 cest = pytz.timezone('Europe/Zagreb')
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
