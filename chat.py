@@ -4,7 +4,7 @@ import psycopg2
 import urllib.parse
 
 def save():
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages))
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages)))
     conn.commit()
 
 def load():
