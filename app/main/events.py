@@ -8,15 +8,6 @@ import cPickle
 cest = pytz.timezone('Europe/Zagreb')
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 
-
-def save():
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages))
-    conn.commit() 
-
-def load():
-    cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
-    messages=cPickle.loads(cur.fetchone())
-
 def addhistory(room,message):
     if room in messages:
         if len(messages[room])>10:

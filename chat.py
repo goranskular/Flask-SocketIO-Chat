@@ -3,6 +3,14 @@ import os
 import psycopg2
 import urllib.parse
 
+def save():
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages))
+    conn.commit()
+
+def load():
+    cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
+    messages=cPickle.loads(cur.fetchone())
+
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
 
