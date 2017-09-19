@@ -19,6 +19,8 @@ def load():
     res = cur.fetchone()
     if res:
         messages=pickle.loads(res[0])
+        return messages
+    return None
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
@@ -33,7 +35,7 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-messages = {}
+messages = load() or {}
 load()
 
 cest = pytz.timezone('Europe/Zagreb')
