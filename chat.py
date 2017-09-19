@@ -2,6 +2,7 @@
 import os
 import psycopg2
 import urllib.parse
+import pickle
 
 def save():
     cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages)))
