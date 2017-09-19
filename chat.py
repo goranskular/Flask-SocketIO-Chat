@@ -1,7 +1,7 @@
 #!/bin/env python
 import os
 import psycopg2
-import urlparse2
+import urlparse
 
 urlparse.uses_netloc.append("postgres")
 url = urlparse2.urlparse(os.environ["DATABASE_URL"])
