@@ -10,7 +10,7 @@ import urllib.parse
 import pickle
 
 def save():
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", pickle.dumps(messages)))
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %s)", ("ALL", pickle.dumps(messages)))
     conn.commit()
 
 def load():
