@@ -1,10 +1,10 @@
 #!/bin/env python
 import os
 import psycopg2
-import urlparse
+import urlparse2
 
 urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+url = urlparse2.urlparse(os.environ["DATABASE_URL"])
 
 conn = psycopg2.connect(
     database=url.path[1:],
