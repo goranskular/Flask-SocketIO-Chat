@@ -8,17 +8,18 @@ import os
 import psycopg2
 import urllib.parse
 import pickle
+import codecs
 
 def save():
     cur.execute("DELETE FROM rooms WHERE room = 'ALL';")
-    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %s)", ("ALL", pickle.dumps(messages)))
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %s)", ("ALL", codecs.encode(pickle.dumps(messages),"base64")))
     conn.commit()
 
 def load():
     cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
     res = cur.fetchone()
     if res:
-        messages=pickle.loads(res[0])
+        messages=pickle.loads(codecs.decode(res[0], "base64"))
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
