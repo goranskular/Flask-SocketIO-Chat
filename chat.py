@@ -11,7 +11,7 @@ def save():
 def load():
     cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
     res = cur.fetchone()
-    if res::
+    if res:
         messages=pickle.loads(res)
 
 urllib.parse.uses_netloc.append("postgres")
