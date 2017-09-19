@@ -3,11 +3,19 @@ from flask_socketio import emit, join_room, leave_room
 from .. import socketio
 from datetime import datetime
 import pytz
+import cPickle
 
 cest = pytz.timezone('Europe/Zagreb')
 fmt = '%Y-%m-%d %H:%M:%S %Z%z'
 
-messages = {}
+
+def save():
+    cur.execute("INSERT INTO rooms (room, messages) VALUES (%s, %S)", ("ALL", cPickle.dumps(messages))
+    conn.commit() 
+
+def load():
+    cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
+    messages=cPickle.loads(cur.fetchone())
 
 def addhistory(room,message):
     if room in messages:
@@ -16,6 +24,7 @@ def addhistory(room,message):
         messages[room].append(message)
     else:
         messages[room] = [message]
+    save()
 
 
 @socketio.on('joined', namespace='/chat')
