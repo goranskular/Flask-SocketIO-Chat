@@ -9,8 +9,9 @@ def save():
     conn.commit()
 
 def load():
-    cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
-    messages=pickle.loads(cur.fetchone())
+    r=cur.execute("SELECT messages FROM rooms WHERE room='ALL';")
+    if r>0:
+        messages=pickle.loads(cur.fetchone())
 
 urllib.parse.uses_netloc.append("postgres")
 url = urllib.parse.urlparse(os.environ["DATABASE_URL"])
